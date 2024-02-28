@@ -1,0 +1,44 @@
+App\Entity\Category:
+    category_{1..5}:
+        name: <word()>
+        
+App\Entity\Recipe:
+    recipe_{1..10}:
+        name: <sentence()>
+        category: '@category_<numberBetween(1, 5)>'
+        instructions: <text(200)>
+        preparationTime: <numberBetween(5, 120)>
+        difficulty: <randomElement(['easy', 'medium', 'hard'])>
+        image: <imageUrl(640, 480)>
+        status: <randomElement(['draft', 'published'])>
+
+App\Entity\Ingredient:
+    ingredient_{1..20}:
+        name: <word()>
+
+App\Entity\RecipeIngredient:
+    recipe_ingredient_{1..50}:
+        recipe: '@recipe_<numberBetween(1, 10)>'
+        ingredient: '@ingredient_<numberBetween(1, 20)>'
+        quantity: <numberBetween(1, 10)>
+        type: <randomElement(['g', 'kg', 'ml', 'l', 'tbsp', 'tsp', 'cup', 'piece'])>
+
+App\Entity\User:
+    user_{1..5}:
+        firstName: <firstName()>
+        lastName: <lastName()>
+        email: <email()>
+        password: <password()>
+        role: <randomElement(['ROLE_USER', 'ROLE_ADMIN'])>
+
+App\Entity\Comment:
+    comment_{1..20}:
+        recipe: '@recipe_<numberBetween(1, 10)>'
+        user: '@user_<numberBetween(1, 5)>'
+        content: <text(200)>
+
+App\Entity\Notation:
+    notation_{1..20}:
+        recipe: '@recipe_<numberBetween(1, 10)>'
+        user: '@user_<numberBetween(1, 5)>'
+        value: <numberBetween(1, 5)>
